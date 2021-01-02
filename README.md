@@ -50,6 +50,10 @@ posts.link();
 
 Please read [CONTRIBUTING.md](https://github.com/orouz/path-link/blob/master/.github/CONTRIBUTING.MD)
 
+## Credits
+
+- @danvk for the some type [wizardy](https://stackoverflow.com/questions/51488717/declaring-dependent-argument-types-for-optional-arguments-with-conditional-types/64796265#64796265)
+
 ## License
 
 MIT
