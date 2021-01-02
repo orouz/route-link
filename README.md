@@ -20,21 +20,39 @@
 
 `npm i path-link`
 
+<sub>requires `typescript@^4.1`</sub>
+
 <br/>
 
 ## **What does it do?**
 
-```typescript
-// this is the gist
-export declare const link: <T extends string>(path: T, params: Params<T>) => string;
-link("/some/:id", { id: "some string" });
+assuming `Path` is a `string` with its segments separated by `/` and parametrized by `/:`
 
-// better used like this though
-export declare const define: <T extends RoutesLike>(paths: T) => PathLinks<T>;
+it maps
+
+```typescript
+Record<Key, Path>
+```
+
+to
+
+```typescript
+Record<
+  Key,
+  {
+    path: Path,
+    link(params: Params<Path>): string
+  }
+>
+```
+
+## **Example**
+
+```typescript
+import { define } from "path-link";
 
 const products = "/products" as const;
 const product = `${products}/:product_id` as const;
-
 const links = define({ products, product });
 
 // Create type-safe links
