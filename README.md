@@ -22,8 +22,25 @@
 
 <br/>
 
-## Docs
+## **What does it do?**
 
-[API]('') | [Guides]('') | [Examples]('')
+```typescript
+// this is the gist
+export declare const link: <T extends string>(path: T, params: Params<T>) => string;
+link("/some/:id", { id: "some string" });
 
-<br/>
+// better used like this though
+export declare const define: <T extends RoutesLike>(paths: T) => PathLinks<T>;
+
+const products = "/products" as const;
+const product = `${products}/:product_id` as const;
+
+const links = define({ products, product });
+
+// Create type-safe links
+links.product.link({ product_id });
+links.products.link();
+
+// Use path
+links.products.path;
+```
