@@ -45,3 +45,11 @@ const post = path(`${posts.path}/:post_id` as const);
 post.link({ post_id: "1" });
 posts.link();
 ```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](./github/CONTRIBUTING.md)
+
+## License
+
+MIT
