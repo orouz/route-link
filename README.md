@@ -48,7 +48,7 @@ posts.link();
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](./github/CONTRIBUTING.md)
+Please read [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
 
 ## License
 
