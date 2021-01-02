@@ -1,7 +1,10 @@
 name: Build
 
 on:
-  pull_request: [develop, master]
+  pull_request: 
+    branches:
+      - develop
+      - master
 
 env:
   webapp_directory: ./
