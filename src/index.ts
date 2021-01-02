@@ -23,7 +23,10 @@ export function link<T extends string>(
 
 /**
  *
- * @param template
+ * @param template a string separated by `/` and parametrized by `/:`
+ * @example
+ * path('/posts/:post_id')
+ * path('/posts')
  */
 export function path<T extends string>(template: T) {
   return {
