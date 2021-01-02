@@ -28,4 +28,14 @@ describe("creates correct links", function () {
     expect(products.link()).toEqual("/products");
     expect(product.link({ product_id: "1" })).toEqual("/products/1");
   });
+
+  it("link has correct arguments length", function () {
+    const { product, products } = setup();
+
+    // @ts-expect-error: Expected 2 arguments, but got 1.
+    link(product); // product has params but their missing
+
+    // @ts-expect-error: Expected 1 arguments, but got 2
+    link(products, {}); // products doesn't have params but they exist
+  });
 });
