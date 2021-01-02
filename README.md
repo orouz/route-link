@@ -37,6 +37,7 @@ link(posts);
 #### **`path`**: wraps string literals with a `link` function
 
 ```typescript
+import { path } from "path-link";
 const posts = path("/posts" as const);
 const post = path(`${posts}/:post_id` as const);
 
