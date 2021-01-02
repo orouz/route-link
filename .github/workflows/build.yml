@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  pull_request: 
+    branches:
+      - master
+ 
+env:
+  webapp_directory: ./
+
+jobs:
+  validate:
+    name: Install, Lint, Test, Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+     
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Package dependencies
+        working-directory: ${{ env.webapp_directory }}
+        run: npm install
+
+      - name: Lint
+        working-directory: ${{ env.webapp_directory }}
+        run: npm run lint
+
+      - name: Test
+        working-directory: ${{ env.webapp_directory }}
+        run: npm run test
+
+      - name: Build Package dependencies
+        working-directory: ${{ env.webapp_directory }}
+        run: npm run build
+
