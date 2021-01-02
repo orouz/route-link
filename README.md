@@ -23,23 +23,28 @@
 
 <br/>
 
-## **Example**
+## **Usage**
+
+### link
 
 ```typescript
-import { link, path } from "path-link";
+import { link } from "path-link";
 
 const posts = "/posts" as const;
-const post = `${posts}/:product_id` as const;
+const post = `${posts}/:post_id` as const;
 
 // Create type-safe links
-link(post, { product_id: "1" });
+link(post, { post_id: "1" });
 link(posts);
+```
 
-// alternatively: wrap paths with a link function
-const products2 = path("/posts" as const);
-const product2 = path(`${posts}/:product_id` as const);
+### path: wrap paths with a link function
+
+```typescript
+const posts = path("/posts" as const);
+const post = path(`${posts}/:post_id` as const);
 
 // Create type-safe links
-product2.link({ product_id: "1" }); // based on product2.path
-products2.link(); // based on products2.path
+post.link({ post_id: "1" }); // based on post.path
+posts.link(); // based on posts.path
 ```
