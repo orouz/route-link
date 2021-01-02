@@ -25,7 +25,7 @@
 
 ## **Usage**
 
-### **link**: create links from string literals
+#### **`link`**: creates a link from a string literal
 
 ```typescript
 import { link } from "path-link";
@@ -38,7 +38,7 @@ link(post, { post_id: "1" });
 link(posts);
 ```
 
-### **path**: wrap paths with a link function
+#### **`path`**: wraps string literals with a `link` function
 
 ```typescript
 const posts = path("/posts" as const);
