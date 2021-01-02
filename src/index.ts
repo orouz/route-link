@@ -31,7 +31,7 @@ const pattern = /(:\w+)/gi;
 export function link<T extends string>(
   ...[path, params]: Params<T> extends never
     ? [path: T]
-    : [path: T, params: Params<T>] // Credit for the type spell: https://stackoverflow.com/questions/51488717/declaring-dependent-argument-types-for-optional-arguments-with-conditional-types/64796265#64796265
+    : [path: T, params: Params<T>]
 ): string {
   if (!params) return path;
 
