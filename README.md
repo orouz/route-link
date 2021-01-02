@@ -46,6 +46,8 @@ Record<
 >
 ```
 
+<br/>
+
 ## **Example**
 
 ```typescript

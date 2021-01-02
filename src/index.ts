@@ -13,7 +13,7 @@ const createPathLinkEntry = ([name, path]: [string, string]) => [name, createPat
  * @param params the param keys inferred from the template string
  * @example
  * link('/posts/:post_id', { post_id: "1" })
- * link('/posts', {}) // see #1234
+ * link('/posts', {} as never) // use `define` to avoid this
  */
 export const link = <T extends string>(path: T, params: Params<T>) =>
   path.replace(/(:\w+)/gi, (key) => params?.[key.slice(1) as keyof Params<T>] || "");
@@ -23,8 +23,6 @@ export const link = <T extends string>(path: T, params: Params<T>) =>
  * @param paths a `Record<string,string>` with its values being a template string separated by `/` and parametrized by `/:`
  */
 export const define = <T extends RoutesLike>(paths: T) =>
-  // NOTE: Casting to PathLinks is what enables the type-checking of the template strings,
-  // But we're losing type-safety by doing so.
-  // I don't think it's possible to safely type Object.keys/entries
-  // Which means we can't map all keys correctly
+  // Some cheating is done with casting for the greater good
+  // PRs are welcome to type this properly
   Object.fromEntries(Object.entries(paths).map(createPathLinkEntry)) as PathLinks<T>;
