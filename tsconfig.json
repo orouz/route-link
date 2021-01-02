@@ -1,21 +1,15 @@
 {
-  "include": ["src", "types", "test"],
+  "include": ["src", "test"],
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "esnext",
+    "target": "ES2015",
+    "module": "ES2015",
     "lib": ["esnext"],
-    "importHelpers": true,
-    "declaration": true,
-    "outDir": "lib",
-    "rootDir": "./",
     "strict": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "tslib": ["path/to/node_modules/tslib/tslib.d.ts"],
-      "*": ["src/*", "node_modules/*"]
-    }
-  }
+    "declaration": true,
+    "declarationDir": "./"
+  },
+  "exclude": ["node_modules", "dist"]
 }
