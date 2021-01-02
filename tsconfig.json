@@ -7,9 +7,7 @@
     "strict": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "declaration": true,
-    "declarationDir": "./"
+    "moduleResolution": "node"
   },
   "exclude": ["node_modules", "dist"]
 }
