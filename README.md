@@ -39,9 +39,9 @@ link(posts);
 ```typescript
 import { path } from "path-link";
 const posts = path("/posts" as const);
-const post = path(`${posts}/:post_id` as const);
+const post = path(`${posts.path}/:post_id` as const);
 
 // Create type-safe links
-post.link({ post_id: "1" }); // based on post.path
-posts.link(); // based on posts.path
+post.link({ post_id: "1" });
+posts.link();
 ```
