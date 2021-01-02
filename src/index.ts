@@ -1,11 +1,6 @@
-import { RoutesLike, PathLinks, Params } from "./types";
+import type { Params, PathLink } from "types";
 
-const createPathLink = (path: string) => ({
-  path,
-  link: link.bind(null, path),
-});
-
-const createPathLinkEntry = ([name, path]: [string, string]) => [name, createPathLink(path)] as const;
+const pattern = /(:\w+)/gi;
 
 /**
  *
@@ -13,16 +8,27 @@ const createPathLinkEntry = ([name, path]: [string, string]) => [name, createPat
  * @param params the param keys inferred from the template string
  * @example
  * link('/posts/:post_id', { post_id: "1" })
- * link('/posts', {} as never) // use `define` to avoid this
+ * link('/posts')
  */
-export const link = <T extends string>(path: T, params: Params<T>) =>
-  path.replace(/(:\w+)/gi, (key) => params?.[key.slice(1) as keyof Params<T>] || "");
+export function link<T extends string>(
+  ...[path, params]: Params<T> extends never
+    ? [path: T]
+    : [path: T, params: Params<T>] // Credit for the type spell: https://stackoverflow.com/questions/51488717/declaring-dependent-argument-types-for-optional-arguments-with-conditional-types/64796265#64796265
+): string {
+  if (!params) return path;
+
+  const replacer = (key: string) => params[key.slice(1) as keyof Params<T>];
+  return path.replace(pattern, replacer);
+}
 
 /**
  *
- * @param paths a `Record<string,string>` with its values being a template string separated by `/` and parametrized by `/:`
+ * @param template
  */
-export const define = <T extends RoutesLike>(paths: T) =>
-  // Some cheating is done with casting for the greater good
-  // PRs are welcome to type this properly
-  Object.fromEntries(Object.entries(paths).map(createPathLinkEntry)) as PathLinks<T>;
+export function path<T extends string>(template: T) {
+  return {
+    path: template,
+    // Some type cheating with casting for the greater good
+    link: (params?: Params<T>) => link(template as any, params as any),
+  } as PathLink<T>;
+}

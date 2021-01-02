@@ -3,30 +3,19 @@
   "compilerOptions": {
     "target": "ES2019",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": ["esnext"],
     "importHelpers": true,
     "declaration": true,
-    "sourceMap": true,
     "outDir": "lib",
     "rootDir": "./",
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": false,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "tslib": ["path/to/node_modules/tslib/tslib.d.ts"],
       "*": ["src/*", "node_modules/*"]
-    },
-    "jsx": "react",
-    "esModuleInterop": true
+    }
   }
 }

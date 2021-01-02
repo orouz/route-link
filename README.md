@@ -10,7 +10,6 @@
 </p>
 
 <div align="center">a utility for constructing type-safe URLs</div>
-<!-- <div align="center">parameterized URLs utility</div> -->
 
 <div style="text-align: center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc">
 </div>
@@ -24,43 +23,23 @@
 
 <br/>
 
-## **What does it do?**
-
-assuming `Path` is a `string` with its segments separated by `/` and parametrized by `/:`
-
-it maps
-
-```typescript
-Record<Key, Path>
-```
-
-to
-
-```typescript
-Record<
-  Key,
-  {
-    path: Path,
-    link(params: Params<Path>): string
-  }
->
-```
-
-<br/>
-
 ## **Example**
 
 ```typescript
-import { define } from "path-link";
+import { link, path } from "path-link";
 
-const products = "/products" as const;
-const product = `${products}/:product_id` as const;
-const links = define({ products, product });
+const posts = "/posts" as const;
+const post = `${posts}/:product_id` as const;
 
 // Create type-safe links
-links.product.link({ product_id });
-links.products.link();
+link(post, { product_id: "1" });
+link(posts);
 
-// Use path
-links.products.path;
+// alternatively: wrap paths with a link function
+const products2 = path("/posts" as const);
+const product2 = path(`${posts}/:product_id` as const);
+
+// Create type-safe links
+product2.link({ product_id: "1" }); // based on product2.path
+products2.link(); // based on products2.path
 ```
