@@ -48,7 +48,7 @@ posts.link();
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
+Please read [CONTRIBUTING.md](https://github.com/orouz/path-link/blob/master/.github/CONTRIBUTING.MD)
 
 ## License
 
