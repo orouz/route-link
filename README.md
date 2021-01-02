@@ -11,15 +11,11 @@
 
 <div align="center">a utility for constructing type-safe URLs</div>
 
-<div style="text-align: center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc">
-</div>
 <br/>
 
 ## **Install**
 
 `npm i path-link`
-
-<sub>requires `typescript@^4.1`</sub>
 
 <br/>
 
