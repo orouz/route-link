@@ -11,15 +11,6 @@ type Params<T extends string> = string extends T
   ? { [k in Param]: string }
   : never;
 
-const pattern = /(:\w+)/gi;
-
-// this function only exists because i didn't succeed calling `link` with a generic string
-// it always infers the arguments length as 1, which is the length for a non-parametrized path
-// this function executes while path/link provide type-safety
-// ideally we'd only need to type 1 link function
-const createURL = (path: string, params?: Record<string, string>) =>
-  params ? path.replace(pattern, (key) => params[key.slice(1)]) : path;
-
 /**
  *
  * @param path a template string separated by `/` and parametrized by `/:`
@@ -46,3 +37,10 @@ export const path = <T extends string>(template: T): PathLink<T> => ({
   link: (...[params]: Params<T> extends never ? [] : [params: Params<T>]) =>
     createURL(template, params),
 });
+
+// this function only exists because i didn't succeed calling `link` with a generic string
+// it always infers the arguments length as 1, which is the length for a non-parametrized path
+// this function executes while path/link provide type-safety
+// ideally we'd only need to type 1 link function
+const createURL = (path: string, params?: Record<string, string>) =>
+  params ? path.replace(/(:\w+)/gi, (key) => params[key.slice(1)]) : path;
