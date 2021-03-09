@@ -8,6 +8,11 @@
   "repository": "github:orouz/path-link",
   "author": "Or Ouziel <ouzielor@gmail.com>",
   "bugs": "https://github.com/orouz/path-link/issues",
+  "keywords": [
+    "link",
+    "route",
+    "url"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
