@@ -1,5 +1,5 @@
 {
-  "name": "path-link",
+  "name": "path-link-ts",
   "description": "a utility for constructing type-safe URLs",
   "version": "1.0.0",
   "main": "lib/index.js",
