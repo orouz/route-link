@@ -1,0 +1,13 @@
+{
+  "include": ["src", "test"],
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "lib": ["esnext"],
+    "strict": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "dist"]
+}
