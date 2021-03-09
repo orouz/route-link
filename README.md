@@ -21,17 +21,19 @@
 
 ## **What does it do?**
 
-it maps a template `string` literal, like this one:
+it maps a `string` literal, parametrized by `:`, like this one:
 
 ```typescript
 const post = `/posts/:post_id` as const;
 ```
 
-to a `function` that returns the template `string` with the provided params:
+to a `function` like this one:
 
 ```typescript
 declare const link(params: { post_id: string }):string
 ```
+
+which is cool because it adds type-safety for using route paths and links.
 
 ## **Usage**
 
@@ -53,7 +55,7 @@ link(post, { post_id: "1" });
 ```typescript
 import { path } from "path-link";
 const posts = path("/posts" as const);
-const post = path(`${posts.path}/:post_id` as const;
+const post = path(`${posts.path}/:post_id` as const);
 
 // Create type-safe links
 posts.link();
