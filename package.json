@@ -5,9 +5,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
-  "repository": "github:orouz/path-link",
+  "repository": "github:orouz/route-link",
   "author": "Or Ouziel <ouzielor@gmail.com>",
-  "bugs": "https://github.com/orouz/path-link/issues",
+  "bugs": "https://github.com/orouz/route-link/issues",
   "keywords": [
     "link",
     "route",
