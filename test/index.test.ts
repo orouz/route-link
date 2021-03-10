@@ -1,4 +1,4 @@
-import { path, link } from "../src/index";
+import { route, link } from "../src/index";
 
 const setup = () => {
   const products = "/products" as const;
@@ -23,8 +23,8 @@ describe("creates correct links", function () {
   it("wraps paths with a link function", function () {
     const { product: productPath, products: productsPath } = setup();
 
-    const product = path(productPath);
-    const products = path(productsPath);
+    const product = route(productPath);
+    const products = route(productsPath);
     expect(products.link()).toEqual("/products");
     expect(product.link({ product_id: "1" })).toEqual("/products/1");
   });

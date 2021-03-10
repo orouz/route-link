@@ -1,4 +1,4 @@
-export interface PathLink<T extends string> {
+export interface RouteLink<T extends string> {
   path: T;
   link(...[params]: Params<T> extends never ? [] : [params: Params<T>]): string;
 }
@@ -27,15 +27,15 @@ export const link = <T extends string>(
 
 /**
  *
- * @param template a string separated by `/` and parametrized by `/:`
+ * @param path a string separated by `/` and parametrized by `/:`
  * @example
  * path('/posts/:post_id')
  * path('/posts')
  */
-export const path = <T extends string>(template: T): PathLink<T> => ({
-  path: template,
+export const route = <T extends string>(path: T): RouteLink<T> => ({
+  path,
   link: (...[params]: Params<T> extends never ? [] : [params: Params<T>]) =>
-    createURL(template, params),
+    createURL(path, params),
 });
 
 // this function only exists because i didn't succeed calling `link` with a generic string
