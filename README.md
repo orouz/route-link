@@ -1,9 +1,11 @@
 <h1 align="center" style="margin-top:0;"> 
 <div>🔗</div>
-<div>path-link</div> </h1>
+<div>route-link</div> </h1>
 <p align="center">
-  <img src="https://img.shields.io/npm/v/readme-md-generator.svg" />
-  <img src="https://img.shields.io/bundlephobia/minzip/alpinejs" />
+  <a href="https://www.npmjs.com/package/route-link">
+    <img src="https://img.shields.io/npm/v/readme-md-generator.svg" />
+  </a>
+  <img src="https://img.shields.io/bundlephobia/minzip/route-link" />
   <a href="https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg" target="_blank" />
   </a>
@@ -40,7 +42,7 @@ which is cool because it adds type-safety for using route paths and links.
 #### **`link`**: creates a link from a `string`
 
 ```typescript
-import { link } from "path-link";
+import { link } from "route-link";
 
 const posts = "/posts" as const;
 const post = `${posts}/:post_id` as const;
@@ -53,9 +55,9 @@ link(post, { post_id: "1" });
 #### **`path`**: wraps a `string` with a `link` function
 
 ```typescript
-import { path } from "path-link";
-const posts = path("/posts" as const);
-const post = path(`${posts.path}/:post_id` as const);
+import { route } from "route-link";
+const posts = route("/posts" as const);
+const post = route(`${posts.path}/:post_id` as const);
 
 // Create type-safe links
 posts.link();
