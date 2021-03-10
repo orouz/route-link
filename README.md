@@ -3,7 +3,7 @@
 <div>route-link</div> </h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/route-link">
-    <img src="https://img.shields.io/npm/v/readme-md-generator.svg" />
+    <img src="https://badge.fury.io/js/route-link.svg" alt="npm version" height="18">
   </a>
   <img src="https://img.shields.io/bundlephobia/minzip/route-link" />
   <a href="https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE">
@@ -23,7 +23,7 @@
 
 ## **What does it do?**
 
-it maps a `string` literal, parametrized by `:`, like this one:
+it maps a parametrized `string`, like this one:
 
 ```typescript
 const post = `/posts/:post_id` as const;
