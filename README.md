@@ -52,7 +52,7 @@ link(posts);
 link(post, { post_id: "1" });
 ```
 
-#### **`path`**: wraps a `string` with a `link` function
+#### **`route`**: wraps a `string` with a `link` function
 
 ```typescript
 import { route } from "route-link";
