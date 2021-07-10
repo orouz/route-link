@@ -11,7 +11,7 @@
   </a>
 </p>
 
-<div align="center">a utility for constructing type-safe URLs</div>
+<div align="center">utilities for constructing type-safe URLs</div>
 
 <br/>
 
@@ -21,69 +21,29 @@
 
 <br/>
 
-## **What does it do?**
-
-it maps a parametrized `string`, like this one:
-
-```typescript
-const post = `/posts/:post_id`;
-```
-
-to a `function` like this one:
-
-```typescript
-declare const link(params: { post_id: string }):string
-```
-
-which is cool because it adds type-safety for using route paths and links.
-
-## **Usage**
-
-#### **`link`**: creates a link from a `string`
-
-```typescript
-import { link } from "route-link";
-
-const posts = "/posts";
-const post = `${posts}/:post_id` as const;
-
-// Create type-safe links
-link(posts);
-link(post, { post_id: "1" });
-```
-
-#### **`route`**: wraps a `string` with a `link` function
-
-```typescript
-import { route } from "route-link";
-const posts = route("/posts");
-const post = route(`${posts.path}/:post_id` as const);
-
-// Create type-safe links
-posts.link();
-post.link({ post_id: "1" });
-```
-
-#### **`extend`**: extends a `RouteLink<T>` with a `string`
+## **Example Usage**
 
 ```typescript
 import { route, extend } from "route-link";
-const posts = route("/posts");
-const post = extend(posts, "/:post_id");
 
-// Create type-safe links
-posts.link();
-post.link({ post_id: "1" });
+const posts = route("/posts");
+const post = extend(posts, '/:post_id')
+
+// generate type safe links
+posts.link() // /posts
+post.link({ post_id: "1" }); // /posts/1
+
+// match URLs to path
+post.match(post.link({ post_id: "1" })) // { post_id: "1" };
+post.match("/foo")) // false
+
+// use route path
+<Route path={post.path}/>
+
 ```
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/orouz/path-link/blob/master/.github/CONTRIBUTING.MD)
+as a convivnce, `link` and `match` are also exported separately
 
 ## Credits
 
 - [@danvk](https://github.com/danvk) for the [type](https://twitter.com/danvdk/status/1301707026507198464?lang=en) [wizardy](https://stackoverflow.com/questions/51488717/declaring-dependent-argument-types-for-optional-arguments-with-conditional-types/64796265#64796265)
-
-## License
-
-MIT
