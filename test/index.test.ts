@@ -1,4 +1,4 @@
-import { route, link } from "../src/index";
+import { route, link, extend } from "../src/index";
 
 const setup = () => {
   const products = "/products" as const;
@@ -37,5 +37,15 @@ describe("creates correct links", function () {
 
     // @ts-expect-error: Expected 1 arguments, but got 2
     link(products, {}); // products has extra params
+  });
+
+  it("route can be extended", function () {
+    const r1 = route("/posts");
+    const r2 = extend(r1, "/:post_id");
+    const r3 = extend(r2, "/foo");
+
+    expect(r1.link()).toEqual("/posts");
+    expect(r2.link({ post_id: "1" })).toEqual("/posts/1");
+    expect(r3.link({ post_id: "1" })).toEqual("/posts/1/foo");
   });
 });
