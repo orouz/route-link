@@ -56,8 +56,20 @@ link(post, { post_id: "1" });
 
 ```typescript
 import { route } from "route-link";
-const posts = route("/posts" as const);
+const posts = route("/posts");
 const post = route(`${posts.path}/:post_id` as const);
+
+// Create type-safe links
+posts.link();
+post.link({ post_id: "1" });
+```
+
+#### **`extend`**: extends a `RouteLink<T>` with a `string`
+
+```typescript
+import { route } from "route-link";
+const posts = route("/posts");
+const post = extend(posts, "/:post_id");
 
 // Create type-safe links
 posts.link();
