@@ -2,6 +2,7 @@
 export interface RouteLink<T extends string> {
   path: T;
   link(...[params]: {} extends Params<T> ? [] : [params: Params<T>]): string;
+  match: (url: string) => false | Params<T>;
 }
 // https://twitter.com/danvdk/status/1301707026507198464?lang=en
 type Params<T extends string> = string extends T
@@ -30,19 +31,63 @@ export const link = <T extends string>(
  *
  * @param path a string separated by `/` and parametrized by `/:`
  * @example
- * path('/posts/:post_id')
- * path('/posts')
+ * route('/posts/:post_id')
+ * route('/posts')
  */
 export const route = <T extends string>(path: T): RouteLink<T> => ({
   path,
+  match: (url: string) => match(path, url),
   link: (...[params]: {} extends Params<T> ? [] : [params: Params<T>]) =>
     createURL(path, params),
 });
 
+/**
+ *
+ * @param a a RouteLink<T>
+ * @param b a string separated by `/` and parametrized by `/:`
+ * @example
+ * const posts = route('/posts')
+ * const post  = extend(posts, '/:post_id')
+ */
 export const extend = <A extends string, B extends string>(
   a: RouteLink<A>,
   b: B
 ): RouteLink<`${A}${B}`> => route((a.path + b) as `${A}${B}`);
+
+/**
+ *
+ * @param path a string separated by `/` and parametrized by `/:`
+ * @param url a string representing a valid URL
+ * @example
+ * const posts = route('/posts')
+ * const post  = extend(posts, '/:post_id')
+ * const params  = match(post.path, '/posts/foo') // { post_id: "foo" }
+ */
+export const match = <T extends string>(
+  path: T,
+  url: string
+): false | Params<T> => {
+  const pathSegments = path.trim().split("/").filter(Boolean);
+  const urlSegments = url.trim().split("/").filter(Boolean);
+
+  if (pathSegments.length !== urlSegments.length) return false;
+
+  const params: Record<string, string> = {};
+
+  for (let i = 0; i < pathSegments.length; i++) {
+    const pathSeg = pathSegments[i];
+    const urlSeg = urlSegments[i];
+
+    if (pathSeg.startsWith(":")) {
+      params[pathSeg.slice(1)] = urlSeg;
+      continue;
+    }
+
+    if (pathSeg !== urlSeg) return false;
+  }
+
+  return params as Params<T>;
+};
 
 // this function only exists because i didn't succeed calling `link` with a generic string
 // it always infers the arguments length as 1, which is the length for a non-parametrized path
