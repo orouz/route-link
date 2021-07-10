@@ -35,9 +35,14 @@ export const link = <T extends string>(
  */
 export const route = <T extends string>(path: T): RouteLink<T> => ({
   path,
-  link: (...[params]: Params<T> extends never ? [] : [params: Params<T>]) =>
+  link: (...[params]: {} extends Params<T> ? [] : [params: Params<T>]) =>
     createURL(path, params),
 });
+
+export const extend = <A extends string, B extends string>(
+  a: RouteLink<A>,
+  b: B
+): RouteLink<`${A}${B}`> => route((a.path + b) as `${A}${B}`);
 
 // this function only exists because i didn't succeed calling `link` with a generic string
 // it always infers the arguments length as 1, which is the length for a non-parametrized path
