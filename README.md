@@ -17,7 +17,7 @@
 
 ## **Install**
 
-`npm i path-link`
+`npm i route-link`
 
 <br/>
 
@@ -26,7 +26,7 @@
 it maps a parametrized `string`, like this one:
 
 ```typescript
-const post = `/posts/:post_id` as const;
+const post = `/posts/:post_id`;
 ```
 
 to a `function` like this one:
@@ -44,7 +44,7 @@ which is cool because it adds type-safety for using route paths and links.
 ```typescript
 import { link } from "route-link";
 
-const posts = "/posts" as const;
+const posts = "/posts";
 const post = `${posts}/:post_id` as const;
 
 // Create type-safe links
@@ -67,7 +67,7 @@ post.link({ post_id: "1" });
 #### **`extend`**: extends a `RouteLink<T>` with a `string`
 
 ```typescript
-import { route } from "route-link";
+import { route, extend } from "route-link";
 const posts = route("/posts");
 const post = extend(posts, "/:post_id");
 
